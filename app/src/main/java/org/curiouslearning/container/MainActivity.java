@@ -175,18 +175,12 @@ public class MainActivity extends BaseActivity {
         if (manifestVersion != null && manifestVersion != "") {
             homeViewModal.getUpdatedAppManifest(manifestVersion);
         }
-        settingsButton = findViewById(R.id.settings);
-        settingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AnimationUtil.scaleButton(view, new Runnable() {
-                    @Override
-                    public void run() {
-                        loadApps("Hausa");
-                    }
-                });
-            }
-        });
+
+        textView = findViewById(R.id.pseudo_id_text);
+        String pseudoId = prefs.getString("pseudoId", "");
+        textView.setText("cr_user_id_" + pseudoId);
+        textView.setVisibility(View.VISIBLE);
+
     }
 
     private class GestureListener extends GestureDetector.SimpleOnGestureListener {
