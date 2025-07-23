@@ -3,7 +3,7 @@
     "project_number": "602402387941",
     "firebase_url": "https://ftm-b9d99.firebaseio.com",
     "project_id": "ftm-b9d99",
-    "storage_bucket": "ftm-b9d99.appspot.com"
+    "storage_bucket": "ftm-b9d99.firebasestorage.app"
   },
   "client": [
     {
@@ -112,6 +112,38 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:602402387941:android:6724782755e8769b9de10c",
+        "android_client_info": {
+          "package_name": "com.eduapp4syria.feedthemonsterTwi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "602402387941-ouvb14ns39oq9m9a772qq88spgivppjn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBY1X35NcYy8pydycUDDAc2qif99tgrWD8"
+        },
+        {
+          "current_key": "AIzaSyCT0L87KjPF-Jr_G1h-LUlBwp1HhaTG6Ho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "602402387941-ouvb14ns39oq9m9a772qq88spgivppjn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:602402387941:android:0e2cdf359e3a42a39de10c",
         "android_client_info": {
           "package_name": "com.eduapp4syria.feedthemonsterUkranian"
@@ -155,6 +187,38 @@
         "mobilesdk_app_id": "1:602402387941:android:a85c07170e8e9e3c9de10c",
         "android_client_info": {
           "package_name": "org.curiouslearning.container"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "602402387941-ouvb14ns39oq9m9a772qq88spgivppjn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBY1X35NcYy8pydycUDDAc2qif99tgrWD8"
+        },
+        {
+          "current_key": "AIzaSyCT0L87KjPF-Jr_G1h-LUlBwp1HhaTG6Ho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "602402387941-ouvb14ns39oq9m9a772qq88spgivppjn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:602402387941:android:51469f69bc8b94fe9de10c",
+        "android_client_info": {
+          "package_name": "org.curiouslearning.researchstudy"
         }
       },
       "oauth_client": [
