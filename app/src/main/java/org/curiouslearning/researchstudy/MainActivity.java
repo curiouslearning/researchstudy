@@ -59,6 +59,10 @@ import android.util.Log;
 import android.content.Intent;
 import android.widget.TextView;
 import androidx.core.view.GestureDetectorCompat;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.qrcode.QRCodeWriter;
+import android.graphics.Bitmap;
 
 public class MainActivity extends BaseActivity {
 
@@ -181,6 +185,9 @@ public class MainActivity extends BaseActivity {
         textView.setText("cr_user_id_" + pseudoId);
         textView.setVisibility(View.VISIBLE);
 
+        ImageView qrCodeImageView = findViewById(R.id.qr_code_image);
+        generateQRCode(pseudoId, qrCodeImageView);
+
     }
 
     private class GestureListener extends GestureDetector.SimpleOnGestureListener {
@@ -243,6 +250,23 @@ public class MainActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    private void generateQRCode(String text, ImageView imageView) {
+        QRCodeWriter writer = new QRCodeWriter();
+        try {
+            int size = 512;
+            com.google.zxing.common.BitMatrix bitMatrix = writer.encode(text, BarcodeFormat.QR_CODE, size, size);
+            Bitmap bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.RGB_565);
+            for (int x = 0; x < size; x++) {
+                for (int y = 0; y < size; y++) {
+                    bitmap.setPixel(x, y, bitMatrix.get(x, y) ? android.graphics.Color.BLACK : android.graphics.Color.WHITE);
+                }
+            }
+            imageView.setImageBitmap(bitmap);
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
     }
 
     protected void initRecyclerView() {

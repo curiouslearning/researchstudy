@@ -96,6 +96,7 @@ dependencies {
     implementation 'androidx.webkit:webkit:1.9.0'
 
     implementation 'com.facebook.android:facebook-android-sdk:17.0.0'
+    implementation 'com.google.zxing:core:3.5.2'
 }
 jacoco {
     toolVersion = "0.8.10" // or latest stable version
