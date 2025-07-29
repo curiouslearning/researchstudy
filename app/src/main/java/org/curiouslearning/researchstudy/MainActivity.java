@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
@@ -59,6 +60,10 @@ import android.util.Log;
 import android.content.Intent;
 import android.widget.TextView;
 import androidx.core.view.GestureDetectorCompat;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.qrcode.QRCodeWriter;
+import android.graphics.Bitmap;
 
 public class MainActivity extends BaseActivity {
 
@@ -86,6 +91,10 @@ public class MainActivity extends BaseActivity {
     private long initialSlackAlertTime;
     private GestureDetectorCompat gestureDetector;
     private TextView textView;
+
+    private FrameLayout qrOverlay;
+    private ImageView qrCodeImageView;
+    private Button showIdButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,10 +185,35 @@ public class MainActivity extends BaseActivity {
             homeViewModal.getUpdatedAppManifest(manifestVersion);
         }
 
-        textView = findViewById(R.id.pseudo_id_text);
+//        textView = findViewById(R.id.pseudo_id_text);
         String pseudoId = prefs.getString("pseudoId", "");
-        textView.setText("cr_user_id_" + pseudoId);
-        textView.setVisibility(View.VISIBLE);
+//        textView.setText("cr_user_id_" + pseudoId);
+//        textView.setVisibility(View.VISIBLE);
+
+        qrOverlay = findViewById(R.id.qr_overlay);
+        qrCodeImageView = findViewById(R.id.qr_code_image);
+        showIdButton = findViewById(R.id.show_id_button);
+
+        generateQRCode(pseudoId, qrCodeImageView);
+
+        showIdButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                qrOverlay.setVisibility(View.VISIBLE);
+                showIdButton.setVisibility(View.GONE);
+            }
+        });
+
+        qrOverlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                qrOverlay.setVisibility(View.GONE);
+                showIdButton.setVisibility(View.VISIBLE);
+            }
+        });
+
+//        ImageView qrCodeImageView = findViewById(R.id.qr_code_image);
+//        generateQRCode(pseudoId, qrCodeImageView);
 
     }
 
@@ -243,6 +277,23 @@ public class MainActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    private void generateQRCode(String text, ImageView imageView) {
+        QRCodeWriter writer = new QRCodeWriter();
+        try {
+            int size = 512;
+            com.google.zxing.common.BitMatrix bitMatrix = writer.encode(text, BarcodeFormat.QR_CODE, size, size);
+            Bitmap bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.RGB_565);
+            for (int x = 0; x < size; x++) {
+                for (int y = 0; y < size; y++) {
+                    bitmap.setPixel(x, y, bitMatrix.get(x, y) ? android.graphics.Color.BLACK : android.graphics.Color.WHITE);
+                }
+            }
+            imageView.setImageBitmap(bitmap);
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
     }
 
     protected void initRecyclerView() {
