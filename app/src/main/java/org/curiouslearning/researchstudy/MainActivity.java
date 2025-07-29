@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
@@ -90,6 +91,10 @@ public class MainActivity extends BaseActivity {
     private long initialSlackAlertTime;
     private GestureDetectorCompat gestureDetector;
     private TextView textView;
+
+    private FrameLayout qrOverlay;
+    private ImageView qrCodeImageView;
+    private Button showIdButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -180,13 +185,35 @@ public class MainActivity extends BaseActivity {
             homeViewModal.getUpdatedAppManifest(manifestVersion);
         }
 
-        textView = findViewById(R.id.pseudo_id_text);
+//        textView = findViewById(R.id.pseudo_id_text);
         String pseudoId = prefs.getString("pseudoId", "");
-        textView.setText("cr_user_id_" + pseudoId);
-        textView.setVisibility(View.VISIBLE);
+//        textView.setText("cr_user_id_" + pseudoId);
+//        textView.setVisibility(View.VISIBLE);
 
-        ImageView qrCodeImageView = findViewById(R.id.qr_code_image);
+        qrOverlay = findViewById(R.id.qr_overlay);
+        qrCodeImageView = findViewById(R.id.qr_code_image);
+        showIdButton = findViewById(R.id.show_id_button);
+
         generateQRCode(pseudoId, qrCodeImageView);
+
+        showIdButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                qrOverlay.setVisibility(View.VISIBLE);
+                showIdButton.setVisibility(View.GONE);
+            }
+        });
+
+        qrOverlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                qrOverlay.setVisibility(View.GONE);
+                showIdButton.setVisibility(View.VISIBLE);
+            }
+        });
+
+//        ImageView qrCodeImageView = findViewById(R.id.qr_code_image);
+//        generateQRCode(pseudoId, qrCodeImageView);
 
     }
 
