@@ -146,7 +146,7 @@ public class MainActivity extends BaseActivity {
                         @Override
                         public void run() {
 
-                            loadApps("Hausa");
+                            loadApps("Hindi");
 
                         }
                     });
@@ -185,10 +185,10 @@ public class MainActivity extends BaseActivity {
             homeViewModal.getUpdatedAppManifest(manifestVersion);
         }
 
-//        textView = findViewById(R.id.pseudo_id_text);
+        // textView = findViewById(R.id.pseudo_id_text);
         String pseudoId = prefs.getString("pseudoId", "");
-//        textView.setText("cr_user_id_" + pseudoId);
-//        textView.setVisibility(View.VISIBLE);
+        // textView.setText("cr_user_id_" + pseudoId);
+        // textView.setVisibility(View.VISIBLE);
 
         qrOverlay = findViewById(R.id.qr_overlay);
         qrCodeImageView = findViewById(R.id.qr_code_image);
@@ -212,8 +212,8 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-//        ImageView qrCodeImageView = findViewById(R.id.qr_code_image);
-//        generateQRCode(pseudoId, qrCodeImageView);
+        // ImageView qrCodeImageView = findViewById(R.id.qr_code_image);
+        // generateQRCode(pseudoId, qrCodeImageView);
 
     }
 
@@ -270,7 +270,7 @@ public class MainActivity extends BaseActivity {
                         @Override
                         public void run() {
 
-                            loadApps("hausa");
+                            loadApps("Hindi");
 
                         }
                     });
@@ -287,7 +287,8 @@ public class MainActivity extends BaseActivity {
             Bitmap bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.RGB_565);
             for (int x = 0; x < size; x++) {
                 for (int y = 0; y < size; y++) {
-                    bitmap.setPixel(x, y, bitMatrix.get(x, y) ? android.graphics.Color.BLACK : android.graphics.Color.WHITE);
+                    bitmap.setPixel(x, y,
+                            bitMatrix.get(x, y) ? android.graphics.Color.BLACK : android.graphics.Color.WHITE);
                 }
             }
             imageView.setImageBitmap(bitmap);
@@ -368,7 +369,7 @@ public class MainActivity extends BaseActivity {
                 // Slack alert
                 SlackUtils.sendMessageToSlack(MainActivity.this, String.valueOf(message));
 
-                loadApps("Hausa");
+                loadApps("Hindi");
                 return;
             }
             homeViewModal.getAllLanguagesInEnglish().observe(this, validLanguages -> {
@@ -378,7 +379,7 @@ public class MainActivity extends BaseActivity {
                 if (lowerCaseLanguages != null && lowerCaseLanguages.size() > 0
                         && !lowerCaseLanguages.contains(language.toLowerCase().trim())) {
                     SlackUtils.sendMessageToSlack(MainActivity.this, String.valueOf(message));
-                    loadApps("Hausa");
+                    loadApps("Hindi");
                     loadingIndicator.setVisibility(View.GONE);
                     selectedLanguage = "";
                     storeSelectLanguage("");
@@ -574,7 +575,7 @@ public class MainActivity extends BaseActivity {
                     storeSelectLanguage(language);
                 } else {
                     if (!prefs.getString("selectedLanguage", "").equals("") && language.equals("")) {
-                        loadApps("Hausa");
+                        loadApps("Hindi");
                     }
                     if (manifestVersion.equals("")) {
                         if (!selectedlanguage.equals(isValidLanguage))
